@@ -27,8 +27,8 @@ int main(int argc, char *argv[]) {
     //     puts("\n");
     // }
 
-
-    for(int i = 0; i < quant; i++) {
+    // teste com um vetor de 5 elementos
+    for(int i = 0; !i; i++) {
         scanf("%d", &length);
         key *dataB = (key *) malloc(length * sizeof(key));
         if(!dataB) {
