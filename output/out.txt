@@ -1,0 +1,6 @@
+Array: { 8  20  423  7  0 }
+Insertion Sort: { 0  7  8  20  423 }
+Selection Sort: { 0  7  8  20  423 }
+Bubble Sort: { 0  7  8  20  423 }
+Merge Sort: { 0  7  8  20  423 }
+Heap Sort: { 0  423  7  20  8 }
