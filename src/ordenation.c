@@ -3,108 +3,68 @@
 #include <time.h>
 #include <stdbool.h>
 
-typedef int key;
 
-
-void testeAlgoritmo(key *array, int length, char *algorithm) {
-    printf("%s: {", algorithm);
-    //teste do algoritmo
-    for(int i = 0; i < length; i++)
-        printf(" %d ", array[i]);
-    printf("}\n");
-    //desaloca o vetor de cópia
-}
-
-void insertionSort(key dataB[], int length) {
-
-    // copia o vetor
-    key *randArr = (key *) malloc(length * sizeof(key));
-    for(int i = 0; i < length; i++)
-        randArr[i] = dataB[i];
+void insertionSort(int dataB[], int length) {
 
     int j = 0;
     for(int i = 1; i < length; i++) {
-        key aux = randArr[i];
-        for(j = i -1; j>= 0 && randArr[j] > aux; j--)
-            randArr[j + 1] = randArr[j];
-        randArr[j + 1] = aux;
+        int aux = dataB[i];
+        for(j = i -1; j>= 0 && dataB[j] > aux; j--)
+            dataB[j + 1] = dataB[j];
+        dataB[j + 1] = aux;
     }
-    
-    testeAlgoritmo(randArr, length, "Insertion Sort");
-    //desaloca o vetor de cópia
-    free(randArr);
 }
 
-void selectionSort(key dataB[], int length) {
-
-    // copia o vetor
-    key *randArr = (key *) malloc(length * sizeof(key));
-    for(int i = 0; i < length; i++)
-        randArr[i] = dataB[i];
-
+void selectionSort(int dataB[], int length) {
 
     int min;
     for(int i = 0; i < length; i++) {
         min = i;
         for(int j = i + 1; j < length; j++) {
-            if(randArr[j] < randArr[min])
+            if(dataB[j] < dataB[min])
                 min = j;
         }
         if(min != i) {
-            key aux = randArr[i];
-            randArr[i] = randArr[min];
-            randArr[min] = aux;
+            int aux = dataB[i];
+            dataB[i] = dataB[min];
+            dataB[min] = aux;
         }
     }
-
-    testeAlgoritmo(randArr, length, "Selection Sort");
-    //desaloca o vetor de cópia
-    free(randArr);
 }
 
 
-void bubbleSort(key dataB[], int length) {
-
-    // copia o vetor
-    key *randArr = (key *) malloc(length * sizeof(key));
-    for(int i = 0; i < length; i++)
-        randArr[i] = dataB[i];
-
+void bubbleSort(int dataB[], int length) {
 
     bool inorder;
     do {
         inorder = true;
         for(int i = 0; i < length - 1; i++) {
-            if(randArr[i] > randArr[i + 1]) {
-                key aux = randArr[i];
-                randArr[i] = randArr[i + 1];
-                randArr[i + 1] = aux;
+            if(dataB[i] > dataB[i + 1]) {
+                int aux = dataB[i];
+                dataB[i] = dataB[i + 1];
+                dataB[i + 1] = aux;
                 inorder = false;
             }
         }
     } while(!inorder);
-
-    testeAlgoritmo(randArr, length, "Bubble Sort");
-    //desaloca o vetor de cópia
-    free(randArr);
 }
 
-void merge(key *randArr, int begin, int mid, int end) {
-    key *tempArray;
+void merge(int *dataB, int begin, int mid, int end) {
+    int *tempArray;
     bool endh1, endh2; 
     endh1 = endh2 = false;
     int h1, h2, length;
     length = end - begin + 1;
     h1 = begin; 
     h2 = mid + 1;
-    tempArray = (key *) malloc(length * sizeof(key));
+    tempArray = (int *) malloc(length * sizeof(int));
     if (tempArray) {
         for (int i = 0; i < length; i++) {
             if (!endh1 && !endh2) {
-                if (randArr[h1] < randArr[h2])
-                    tempArray[i] = randArr[h1++];
+                if (dataB[h1] < dataB[h2])
+                    tempArray[i] = dataB[h1++];
                 else
-                    tempArray[i] = randArr[h2++];
+                    tempArray[i] = dataB[h2++];
 
                 if (h1 > mid)
                     endh1 = true;
@@ -113,35 +73,77 @@ void merge(key *randArr, int begin, int mid, int end) {
             } 
             else {
                 if (!endh1)
-                    tempArray[i] = randArr[h1++];
+                    tempArray[i] = dataB[h1++];
                 else
-                    tempArray[i] = randArr[h2++];
+                    tempArray[i] = dataB[h2++];
             }
         }
         for (int i = 0, k = begin; i < length; i++, k++)
-            randArr[k] = tempArray[i];
+            dataB[k] = tempArray[i];
         free(tempArray);
     }
 }
 
-void recursiveMergeCalls(key *randArr, int begin, int end) {
+void recursiveMergeCalls(int *dataB, int begin, int end) {
     if (begin < end) {
         int mid = (begin + end) / 2;
-        recursiveMergeCalls(randArr, begin, mid);
-        recursiveMergeCalls(randArr, mid + 1, end);
-        merge(randArr, begin, mid, end);
+        recursiveMergeCalls(dataB, begin, mid);
+        recursiveMergeCalls(dataB, mid + 1, end);
+        merge(dataB, begin, mid, end);
     }
 
 }
-void mergeSort(key dataB[], int length, int begin, int end) {
 
-    // copia o vetor
-    key *randArr = (key *) malloc(length * sizeof(key));
-    for(int i = 0; i < length; i++)
-        randArr[i] = dataB[i];
+void mergeSort(int dataB[], int length, int begin, int end) {
 
-    recursiveMergeCalls(randArr, begin, end);
-    testeAlgoritmo(randArr, length, "Merge Sort");
+    recursiveMergeCalls(dataB, begin, end);
+    testeAlgoritmo(dataB, length, "Merge Sort");
     //desaloca o vetor de cópia
-    free(randArr);
+    free(dataB);
+}
+
+void maxHeapify(int *vet, const int sizeVet, int *comp, int *acoes){
+    /*
+        vet: vetor que deverá ser ordenado
+        sizeVet: tamanho do vetor
+    */
+    int root, leaf, aux;
+    /*
+        root:   indice da raiz
+        leaf:   indice da folha
+        aux: auxiliar
+    */
+    for(leaf = sizeVet; leaf; leaf--){
+        (*comp)++;
+
+        root = (leaf-1)/2; (*acoes)++;
+        //teste entre a raiz e sua folha
+        if(vet[root] < vet[leaf]){
+            (*comp)++;
+
+            aux = vet[leaf];
+            vet[leaf] = vet[root];
+            vet[root] = aux;
+
+            (*acoes)+=3;
+        }    
+    }
+}
+
+void heapSort(int *vet, int sizeVet, int *comp, int *acoes){
+    int aux;
+
+    for(sizeVet--; sizeVet; sizeVet--){ 
+            (*comp)++;       
+        //max_heapify nao se envolve com algo alem do limite dado
+            max_heapify(vet, sizeVet, comp, acoes);
+        //trocando o primeiro com o sizeVetimo elemento
+            aux = vet[sizeVet];
+            vet[sizeVet] = vet[0];
+            vet[0] = aux;
+
+            (*acoes)+=3;
+    }
+
+    // *comp += sizeVet-1;
 }

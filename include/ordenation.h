@@ -7,6 +7,6 @@ void insertionSort(key [], int);
 void selectionSort(key [], int);
 void bubbleSort(key [], int);
 void mergeSort(key [], int, int, int);
-void heapSort(key [], int);
+void heapSort(int *vet, int sizeVet, int *comp, int *);
 
 #endif
