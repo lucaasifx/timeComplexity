@@ -4,18 +4,21 @@
 #include <stdbool.h>
 
 
-void insertionSort(int dataB[], int length) {
-
+void insertionSort(int dataB[], int length, int *comp, int *acessaArray) {
     int j = 0;
     for(int i = 1; i < length; i++) {
         int aux = dataB[i];
-        for(j = i -1; j>= 0 && dataB[j] > aux; j--)
+        for(j = i -1; j >= 0 && dataB[j] > aux; j--) {
+            (*comp)++;
             dataB[j + 1] = dataB[j];
+            (*acessaArray) += 3;
+        }
         dataB[j + 1] = aux;
+        (*acessaArray) += 2;
     }
 }
 
-void selectionSort(int dataB[], int length) {
+void selectionSort(int dataB[], int length, int *comp, int *acessaArray) {
 
     int min;
     for(int i = 0; i < length; i++) {
@@ -33,18 +36,20 @@ void selectionSort(int dataB[], int length) {
 }
 
 
-void bubbleSort(int dataB[], int length) {
-
+void bubbleSort(int dataB[], int length, int *comp, int *acessaArray) {
     bool inorder;
     do {
         inorder = true;
         for(int i = 0; i < length - 1; i++) {
+            (*comp)++;
             if(dataB[i] > dataB[i + 1]) {
                 int aux = dataB[i];
                 dataB[i] = dataB[i + 1];
                 dataB[i + 1] = aux;
+                (*acessaArray) += 4;
                 inorder = false;
             }
+            (*acessaArray) += 2;
         }
     } while(!inorder);
 }
@@ -91,18 +96,14 @@ void recursiveMergeCalls(int *dataB, int begin, int end) {
         recursiveMergeCalls(dataB, mid + 1, end);
         merge(dataB, begin, mid, end);
     }
-
 }
 
 void mergeSort(int dataB[], int length, int begin, int end) {
 
     recursiveMergeCalls(dataB, begin, end);
-    testeAlgoritmo(dataB, length, "Merge Sort");
-    //desaloca o vetor de cópia
-    free(dataB);
 }
 
-void maxHeapify(int *vet, const int sizeVet, int *comp, int *acoes){
+void maxHeapify(int *vet, const int sizeVet, int *comp, int *acessaArray){
     /*
         vet: vetor que deverá ser ordenado
         sizeVet: tamanho do vetor
@@ -116,7 +117,7 @@ void maxHeapify(int *vet, const int sizeVet, int *comp, int *acoes){
     for(leaf = sizeVet; leaf; leaf--){
         (*comp)++;
 
-        root = (leaf-1)/2; (*acoes)++;
+        root = (leaf-1)/2; (*acessaArray)++;
         //teste entre a raiz e sua folha
         if(vet[root] < vet[leaf]){
             (*comp)++;
@@ -125,24 +126,24 @@ void maxHeapify(int *vet, const int sizeVet, int *comp, int *acoes){
             vet[leaf] = vet[root];
             vet[root] = aux;
 
-            (*acoes)+=3;
+            (*acessaArray)+=3;
         }    
     }
 }
 
-void heapSort(int *vet, int sizeVet, int *comp, int *acoes){
+void heapSort(int *vet, int sizeVet, int *comp, int *acessaArray){
     int aux;
 
     for(sizeVet--; sizeVet; sizeVet--){ 
             (*comp)++;       
         //max_heapify nao se envolve com algo alem do limite dado
-            max_heapify(vet, sizeVet, comp, acoes);
+            maxHeapify(vet, sizeVet, comp, acessaArray);
         //trocando o primeiro com o sizeVetimo elemento
             aux = vet[sizeVet];
             vet[sizeVet] = vet[0];
             vet[0] = aux;
 
-            (*acoes)+=3;
+            (*acessaArray)+=3;
     }
 
     // *comp += sizeVet-1;

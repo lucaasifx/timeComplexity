@@ -3,10 +3,10 @@
 
 typedef int key;
 
-void insertionSort(key [], int);
+void insertionSort(int [], int, int *, int *);
 void selectionSort(key [], int);
-void bubbleSort(key [], int);
+void bubbleSort(int [], int, int *, int *);
 void mergeSort(key [], int, int, int);
-void heapSort(int *vet, int sizeVet, int *comp, int *);
+void heapSort(int *, int , int *, int *);
 
 #endif
