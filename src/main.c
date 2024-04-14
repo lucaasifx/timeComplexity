@@ -3,7 +3,6 @@
 #include <time.h>
 #include <stdbool.h>
 #include "ordenation.h"
-#define quant 6
 typedef int key;
 
 
