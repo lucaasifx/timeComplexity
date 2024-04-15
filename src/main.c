@@ -35,7 +35,7 @@ int main(){
             scanf("%d", &vet[i]);
 
         comp = acessaArray = 0;
-        //funcao de ordenacao com parametro pra contagem de acoes/comparacoes
+        //funcao de ordenacao com parametro pra contagem de comparações/acessos ao vetor
         //insertionSort(vet, n, &comp, &acessaArray);
         // bubbleSort(vet, n, &comp, &acessaArray);
         //selectionSort(vet, n, &comp, &acessaArray);
