@@ -57,7 +57,7 @@ void bubbleSort(int dataB[], int length, int *comp, int *acessaArray) {
     } while(!inorder);
 }
 
-void merge(int *dataB, int begin, int mid, int end, int *comp, int *acessaArray) {
+void merge(int *dataB, int begin, int mid, int end, int *comp, int *acoes) {
     int *tempArray;
     bool endh1, endh2; 
     endh1 = endh2 = false;
@@ -68,42 +68,61 @@ void merge(int *dataB, int begin, int mid, int end, int *comp, int *acessaArray)
     tempArray = (int *) malloc(length * sizeof(int));
     if (tempArray) {
         for (int i = 0; i < length; i++) {
+            
+            
             if (!endh1 && !endh2) {
+                
+                *(comp)++; //compraracao
                 if (dataB[h1] < dataB[h2])
                     tempArray[i] = dataB[h1++];
                 else
                     tempArray[i] = dataB[h2++];
+                *(acoes) += 4; //quatro interacoes com vetores dentro da condicional
+
 
                 if (h1 > mid)
                     endh1 = true;
                 if (h2 > end)
                     endh2 = true;
+                //Não sei se considero esse trecho, so verifica se um dos subvetores terminou
+                //Não compara elementos de vetores, que é o que importa eu acho
             } 
             else {
+                
                 if (!endh1)
                     tempArray[i] = dataB[h1++];
                 else
                     tempArray[i] = dataB[h2++];
+                *(acoes) += 4; //quatro interacoes com vetores dentro da condicional
             }
         }
-        for (int i = 0, k = begin; i < length; i++, k++)
+        for (int i = 0, k = begin; i < length; i++, k++){
             dataB[k] = tempArray[i];
+            *(acoes) += 2; //duas interacoes com vetores
+        }
         free(tempArray);
     }
 }
 
-void recursiveMergeCalls(int *dataB, int begin, int end, int *comp, int *acessaArray) {
+void recursiveMergeCalls(int *dataB, int begin, int end, int *comp, int *acoes) {
+    *(comp)++;
     if (begin < end) {
         int mid = (begin + end) / 2;
-        recursiveMergeCalls(dataB, begin, mid, comp, acessaArray);
-        recursiveMergeCalls(dataB, mid + 1, end, comp, acessaArray);
-        merge(dataB, begin, mid, end,comp, acessaArray);
+        recursiveMergeCalls(dataB, begin, mid, comp, acoes);
+        recursiveMergeCalls(dataB, mid + 1, end, comp, acoes);
+        merge(dataB, begin, mid, end, comp, acoes);
     }
+
 }
 
-void mergeSort(int dataB[], int length, int begin, int end, int *comp, int *acessaArray) {
-    recursiveMergeCalls(dataB, begin, end, comp, acessaArray);
+void mergeSort(int dataB[], int length, int begin, int end, int *comp, int *acoes) {
+
+    recursiveMergeCalls(dataB, begin, end, comp, acoes);
+    testeAlgoritmo(dataB, length, "Merge Sort");
+    //desaloca o vetor de cópia
+    free(dataB);
 }
+
 
 void maxHeapify(int *vet, const int sizeVet, int *comp, int *acessaArray){
     /*
