@@ -150,3 +150,25 @@ void heapSort(int *vet, int sizeVet, int *comp, int *acessaArray){
 
     // *comp += sizeVet-1;
 }
+
+void quickSort(int dataB[], int length, int begin, int end, int *comp, int *acessaArray) {
+    int pivot = dataB[begin];
+    int left = begin, right = end;
+    while(left <= right) {
+        while(dataB[left] < pivot)
+            left++;
+        while(dataB[right] > pivot)
+            right--;
+        if(left <= right) {
+            int aux = dataB[left];
+            dataB[left] = dataB[right];
+            dataB[right] = aux;
+            left++;
+            right--;
+        }
+    }
+    if(begin < right)
+        quickSort(dataB, length, begin, right);
+    if(left < end)
+        quickSort(dataB, length, left, end);
+}
