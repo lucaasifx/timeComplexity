@@ -7,7 +7,7 @@
 
 int main(){
     // //geração dos valores
-    // int length[] = {6, 100, 500, 1000, 7500, 10000};
+    // int length[] = {5, 100, 500, 1000, 7500, 10000};
     // for(int i = 0; i < 6; i++) {
     //     printf("%d\n", length[i]);
     //     length[i] /= 100;
