@@ -6,8 +6,23 @@
 
 
 int main(){
-    int n, *vet=NULL, comp, acessaArray;
+    // //geração dos valores
+    // int length[] = {6, 100, 500, 1000, 7500, 10000};
+    // for(int i = 0; i < 6; i++) {
+    //     printf("%d\n", length[i]);
+    //     length[i] /= 100;
+    //     for(int j = 0; j < length[i]; j++) {
+    //         for(int t = 0; t < 100; t++) {
+    //             key k = rand();
+    //             printf("%d ", k);
+    //         }
+    //         puts("");
+    //     }
+    //     puts("\n");
+    // }
 
+
+    int n, *vet=NULL, comp, acessaArray;
     while(scanf("%d", &n) != EOF){
 
         vet = (int*) malloc(n * sizeof(int));
