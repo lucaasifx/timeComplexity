@@ -21,7 +21,11 @@ int main(){
 
         comp = acessaArray = 0;
         //funcao de ordenacao com parametro pra contagem de acoes/comparacoes
-        bubbleSort(vet, n, &comp, &acessaArray);
+        //insertionSort(vet, n, &comp, &acessaArray);
+        // bubbleSort(vet, n, &comp, &acessaArray);
+        //selectionSort(vet, n, &comp, &acessaArray);
+        heapSort(vet, n, &comp, &acessaArray);
+
 
         printf("\ninput \"%04d.txt\" \n", n);
         printf("|Comparacoes: %d\n", comp);

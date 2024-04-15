@@ -18,7 +18,7 @@ app:
 $(OBJ)/%.o: $(SRC)/%.c $(INCLUDE)/%.h
 	gcc -c $< -I $(INCLUDE) -o $@
 run:
-	$(BIN)/app < $(INPUT)/dataB.txt > $(OUTPUT)/out.txt
+	$(BIN)/app < $(INPUT)/dataB.txt > $(OUTPUT)/heap.txt
 
 clear:
 	rm -rf $(BIN)/*

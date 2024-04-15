@@ -24,6 +24,8 @@ void selectionSort(int dataB[], int length, int *comp, int *acessaArray) {
     for(int i = 0; i < length; i++) {
         min = i;
         for(int j = i + 1; j < length; j++) {
+            (*comp)++;
+            (*acessaArray) += 2;
             if(dataB[j] < dataB[min])
                 min = j;
         }
@@ -31,10 +33,11 @@ void selectionSort(int dataB[], int length, int *comp, int *acessaArray) {
             int aux = dataB[i];
             dataB[i] = dataB[min];
             dataB[min] = aux;
+            (*acessaArray) += 4;
         }
+        (*comp)++;
     }
 }
-
 
 void bubbleSort(int dataB[], int length, int *comp, int *acessaArray) {
     bool inorder;
@@ -54,7 +57,7 @@ void bubbleSort(int dataB[], int length, int *comp, int *acessaArray) {
     } while(!inorder);
 }
 
-void merge(int *dataB, int begin, int mid, int end) {
+void merge(int *dataB, int begin, int mid, int end, int *comp, int *acessaArray) {
     int *tempArray;
     bool endh1, endh2; 
     endh1 = endh2 = false;
@@ -89,18 +92,17 @@ void merge(int *dataB, int begin, int mid, int end) {
     }
 }
 
-void recursiveMergeCalls(int *dataB, int begin, int end) {
+void recursiveMergeCalls(int *dataB, int begin, int end, int *comp, int *acessaArray) {
     if (begin < end) {
         int mid = (begin + end) / 2;
-        recursiveMergeCalls(dataB, begin, mid);
-        recursiveMergeCalls(dataB, mid + 1, end);
-        merge(dataB, begin, mid, end);
+        recursiveMergeCalls(dataB, begin, mid, comp, acessaArray);
+        recursiveMergeCalls(dataB, mid + 1, end, comp, acessaArray);
+        merge(dataB, begin, mid, end,comp, acessaArray);
     }
 }
 
-void mergeSort(int dataB[], int length, int begin, int end) {
-
-    recursiveMergeCalls(dataB, begin, end);
+void mergeSort(int dataB[], int length, int begin, int end, int *comp, int *acessaArray) {
+    recursiveMergeCalls(dataB, begin, end, comp, acessaArray);
 }
 
 void maxHeapify(int *vet, const int sizeVet, int *comp, int *acessaArray){
