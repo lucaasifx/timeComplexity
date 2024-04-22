@@ -1,24 +1,24 @@
 
 input "0005.txt" 
 |Comparacoes: 20
-|Acesso ao vetor: 68
+|Acesso ao vetor: 82
 
 input "0100.txt" 
 |Comparacoes: 8811
-|Acesso ao vetor: 27450
+|Acesso ao vetor: 32364
 
 input "0500.txt" 
 |Comparacoes: 235029
-|Acesso ao vetor: 734506
+|Acesso ao vetor: 866730
 
 input "1000.txt" 
 |Comparacoes: 963036
-|Acesso ao vetor: 2960020
+|Acesso ao vetor: 3476994
 
 input "7500.txt" 
 |Comparacoes: 55110151
-|Acesso ao vetor: 165739538
+|Acesso ao vetor: 193499156
 
 input "10000.txt" 
 |Comparacoes: 98500149
-|Acesso ao vetor: 296884490
+|Acesso ao vetor: 346826586

@@ -22,7 +22,8 @@ int main(){
     // }
 
 
-    int n, *vet=NULL, comp, acessaArray;
+    int n, *vet=NULL;
+    unsigned long int comp, acessaArray;
     while(scanf("%d", &n) != EOF){
 
         vet = (int*) malloc(n * sizeof(int));
@@ -34,17 +35,22 @@ int main(){
         for(int i = 0; i < n; i++)
             scanf("%d", &vet[i]);
 
-        comp = acessaArray = 0;
-        //funcao de ordenacao com parametro pra contagem de comparações/acessos ao vetor
+        comp = 0;
+        acessaArray = 0;
+
+        //funções de ordenacao com parametro pra contagem de comparações/acessos ao vetor
+
         //insertionSort(vet, n, &comp, &acessaArray);
-        // bubbleSort(vet, n, &comp, &acessaArray);
         //selectionSort(vet, n, &comp, &acessaArray);
+        //bubbleSort(vet, n, &comp, &acessaArray);
+        //quickSort(vet, n, 0, n -1, &comp, &acessaArray);
+        //mergeSort(vet, 0, n-1, &comp, &acessaArray);
         heapSort(vet, n, &comp, &acessaArray);
 
 
         printf("\ninput \"%04d.txt\" \n", n);
-        printf("|Comparacoes: %d\n", comp);
-        printf("|Acesso ao vetor: %d\n", acessaArray);
+        printf("|Comparacoes: %lu\n", comp);
+        printf("|Acesso ao vetor: %lu\n", acessaArray);
         free(vet);
     }
 }
