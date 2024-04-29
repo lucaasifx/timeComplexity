@@ -1,7 +1,7 @@
 #ifndef ORDENATION_H
 #define ORDENATION_H
 
-
+void displayArray(int[], int);
 void insertionSort(int [], int , unsigned long int *, unsigned long int *);
 void selectionSort(int [], int, unsigned long int *, unsigned long int *);
 void bubbleSort(int [], int, unsigned long int *, unsigned long int *);

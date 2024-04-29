@@ -4,6 +4,16 @@
 #include <stdbool.h>
 
 
+void displayArray(int dataB[], int length) {
+    printf("Array: { ");
+    for(int i = 0; i < length; i++) {
+        if(!(i % 10)  && i)
+            puts("");
+        i != length -1 ? printf("%d, ", dataB[i]) : printf("%d ", dataB[i]); 
+    }
+    printf("}\n");
+}
+
 void insertionSort(int dataB[], int length, unsigned long int *comp, unsigned long int *acessaArray) {
     int j = 0;
     for(int i = 1; i < length; i++) {
